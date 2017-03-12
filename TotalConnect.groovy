@@ -36,20 +36,21 @@ definition(
     iconX2Url: "https://s3.amazonaws.com/yogi/TotalConnect/300.png")
 
 preferences {
-    page(name: "credentials", title: "Total Connect Login", nextPage: "locationList", uninstall: false) {
+    page(name: "credentials", title: "Total Connect Login", nextPage: "success", uninstall: false) {
         section ("Give your Total Connect credentials. Recommended to make another user for SmartThings") {
     		input("userName", "text", title: "Username", description: "Your username for TotalConnect")
     		input("password", "password", title: "Password", description: "Your Password for TotalConnect")
     		input("applicationId", "text", title: "Application ID - It is '14588' currently", description: "Application ID")
     		input("applicationVersion", "text", title: "Application Version", description: "Application Version")
+		input("locationId", "text", title: "LocationId (use tester to get)", description:"Location ID")
+		input("selectedLocation", "text", title: "LocationName (call TC API to get)", description:"Location Name")
 			}
     	}
-    page(name: "locationList", title: "Select the Total Connection Location for this App", nextPage: "success", content:"locationList")
     page(name: "success")
 }
 
 // Start of Page Functions
-private locationList(params=[:]){
+/*private locationList(params=[:]){
 	def locations = locationFound()
     def options = locations.keySet() ?: []
 	return dynamicPage(name:"locationList", title:"Pulling up the Location List!", install: true, uninstall: true) {
@@ -95,7 +96,7 @@ Map locationFound() {
         		log.debug "Smart Things has successfully logged out during settings"
         	}
     return locationMap
-}
+}*/
 def success() {
 
     dynamicPage(name: "success") {
